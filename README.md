@@ -85,10 +85,10 @@ AppRater appRater = new AppRater();
 
 **Option Details:**
  * `daysUntilPrompt(int days)`
-    Number of day until the user will be prompted (Default 3 days)
+ Number of day until the user will be prompted (Default 3 days)
  * `launchesUntilPrompt(int numLaunches)`
  Minimum number of launches before prompt is displayed.
-    This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
+ This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
  * `isDark(boolean isDark)`
     If true then `android.app.AlertDialog.THEME_HOLO_DARK` is used,
     if false then `android.app.AlertDialog.THEME_HOLO_LIGHT` is used. (Default to app style)
@@ -98,7 +98,7 @@ AppRater appRater = new AppRater();
     If true then re-enable prompt. (Default `false`)
  * `isVersionCodeCheckEnabled(boolean checkCode)`
     If true then re-enable prompt. (Default `false`)
- * `market(Market market)`
+ * `market(Market market)`   
     Class that implements `Market` interface. (Default `GoogleMarket`)
 
 You can implement your own market, implementing the Market interface and parse your URI.
