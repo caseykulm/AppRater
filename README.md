@@ -36,7 +36,7 @@ public class MyActivity extends Activity {
 
 ``` java
 public class MyAppRater extends AppRater {
-    private static AppRater mInstance;
+    private static MyAppRater mInstance;
 
     public static MyAppRater getInstance(Context context) {
         if (mInstance == null) {
@@ -80,7 +80,7 @@ AppRater.Builder(context)
 An AppRater object can be instantiated with these same default values simply with,
 
 ``` java
-AppRater.Builder(context);
+AppRater appRater = new AppRater();
 ```
 
 You can use the overriden method to specify your own day and launch count parameters.
