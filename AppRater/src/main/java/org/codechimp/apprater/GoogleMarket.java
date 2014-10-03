@@ -8,6 +8,6 @@ public class GoogleMarket implements Market {
 
     @Override
     public Uri getMarketURI(Context context) {
-        return Uri.parse(marketLink + context.getPackageName().toString());
+        return Uri.parse(marketLink + context.getPackageName());
     }
 }
