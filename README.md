@@ -84,19 +84,19 @@ AppRater appRater = new AppRater();
 ```
 
 **Option Details:**
- * `daysUntilPrompt(int days)`
- Number of day until the user will be prompted (Default 3 days)
- * `launchesUntilPrompt(int numLaunches)`
- Minimum number of launches before prompt is displayed.
- This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
- * `isDark(boolean isDark)`
+ * `daysUntilPrompt(int days)`   
+    Number of day until the user will be prompted (Default 3 days)
+ * `launchesUntilPrompt(int numLaunches)`   
+    Minimum number of launches before prompt is displayed.
+    This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
+ * `isDark(boolean isDark)`   
     If true then `android.app.AlertDialog.THEME_HOLO_DARK` is used,
     if false then `android.app.AlertDialog.THEME_HOLO_LIGHT` is used. (Default to app style)
- * `hideNoButton(boolean hide)`
+ * `hideNoButton(boolean hide)`   
     If true then no "No thank you" option is available. (Default `false`)
- * `isVersionNameCheckEnabled(boolean checkName)`
+ * `isVersionNameCheckEnabled(boolean checkName)`   
     If true then re-enable prompt. (Default `false`)
- * `isVersionCodeCheckEnabled(boolean checkCode)`
+ * `isVersionCodeCheckEnabled(boolean checkCode)`   
     If true then re-enable prompt. (Default `false`)
  * `market(Market market)`   
     Class that implements `Market` interface. (Default `GoogleMarket`)
