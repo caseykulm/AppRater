@@ -34,14 +34,9 @@ public class MainActivity extends Activity {
 		});
 
 
-        // Optionally you can set the Market you want to use prior to calling app_launched
-        // If market not called it will default to Google Play
-        // Current implementations are Google Play and Amazon App Store, you can add your own by implementing Market
-        // AppRater.market(new GoogleMarket());
-        // AppRater.market(new AmazonMarket());
-
-        // This will keep a track of when the app was first used and whether to show a prompt
-		// It should be the default implementation of AppRater
+        // AppRater.Builder showing every option, and their
+        // default values. The context passed into the builders
+        // constructor is required.
         mAppRater = new AppRater.Builder(this)
                 .daysUntilPrompt(3)
                 .launchesUntilPrompt(7)

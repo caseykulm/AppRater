@@ -11,10 +11,9 @@ import android.os.Build;
 import android.util.Log;
 
 public class AppRater {
-    private Context mContext;
-    
     // Preference Constants
     private final static String PREF_NAME = "apprater";
+
     private final static String PREF_LAUNCH_COUNT = "launch_count";
     private final static String PREF_FIRST_LAUNCHED = "date_firstlaunch";
     private final static String PREF_DONT_SHOW_AGAIN = "dontshowagain";
@@ -22,13 +21,17 @@ public class AppRater {
     private final static String PREF_APP_VERSION_NAME = "app_version_name";
     private final static String PREF_APP_VERSION_CODE = "app_version_code";
 
-    private int daysUntilPromptForRemindLater;
-    private int launchesUntilPromptForRemindLater;
-    private boolean isDark;
-    private boolean themeSet;
-    private boolean hideNoButton;
-    private boolean isVersionNameCheckEnabled;
-    private boolean isVersionCodeCheckEnabled;
+    // required
+    private Context mContext;
+
+    // options
+    private int daysUntilPromptForRemindLater = 3;
+    private int launchesUntilPromptForRemindLater = 7;
+    private boolean isDark = false;
+    private boolean themeSet = false;
+    private boolean hideNoButton = false;
+    private boolean isVersionNameCheckEnabled = false;
+    private boolean isVersionCodeCheckEnabled = false;
 
     private Market market = new GoogleMarket();
 
@@ -96,6 +99,10 @@ public class AppRater {
         public AppRater build() {
             return new AppRater(this);
         }
+    }
+
+    public AppRater(Context context) {
+        mContext = context;
     }
 
     private AppRater(Builder builder) {

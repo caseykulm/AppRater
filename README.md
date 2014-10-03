@@ -7,11 +7,81 @@ AppRater inherits your themeing so can be used with light or dark variants as se
 
 ![Example Image Dark][1] ![Example Image Light][2]
 
-To use simply add the library to your app and make one call within your onCreate method as follows;
+## Quick Setup
 
-`AppRater.app_launched(this);`
+### Single Activity Usage
+
+``` java
+public class MyActivity extends Activity {
+    private AppRater mAppRater;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mAppRater = AppRater.Builder(this)
+                ...
+                .build();
+
+        mAppRater.showRateDialog();
+    }
+
+    private void letMeRate() {
+        mAppRater.rateNow();
+    }
+}
+```
+
+### Application Singleton Usage
+
+``` java
+public class MyAppRater extends AppRater {
+    private static AppRater mInstance;
+
+    public static MyAppRater getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new MyAppRater(context);
+        }
+
+        return mInstance;
+    }
+
+    private MyAppRater(Context context) {
+        MyAppRater myAppRater = AppRater.Builder(context.getApplicationContext())
+                        ...
+                        .build();
+
+        return myAppRater;
+    }
+}
+```
+
+With this you can simply call `MyAppRater.getInstance(context)`, to retrieve an instance from
+anywhere in your app with all of the customization set once. This is the preferred implementation
+if you only intend to have one style.
+
+## Configuration
 
 There are several options you can also use to change the default behavior.
+
+``` java
+// An example using every option with default values.
+AppRater.Builder(context)
+        .daysUntilPrompt(3)
+        .launchesUntilPrompt(7)
+        .isDark(true)
+        .hideNoButton(false)
+        .isVersionNameCheckEnabled(false)
+        .isVersionCodeCheckEnabled(false)
+        .market(new GoogleMarket())
+        .build();
+```
+
+An AppRater object can be instantiated with these same default values simply with,
+
+``` java
+AppRater.Builder(context);
+```
 
 You can use the overriden method to specify your own day and launch count parameters.
 `setVersionCodeCheckEnabled` or `setVersionNameCheckEnabled` enable version checking, which will re-enable the prompt count if a new version is installed.
