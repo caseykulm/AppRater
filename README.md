@@ -83,16 +83,16 @@ An AppRater object can be instantiated with these same default values simply wit
 AppRater appRater = new AppRater();
 ```
 
-You can use the overriden method to specify your own day and launch count parameters.
-`setVersionCodeCheckEnabled` or `setVersionNameCheckEnabled` enable version checking, which will re-enable the prompt count if a new version is installed.
-`isNoButtonVisible` will disable the No Thanks button, forcing the user to either rate or prompt later.
-`setDarkTheme` and `setLightTheme` enable manual control over the theme the dialog uses, overriding your application default.
-
-By default this will link to the Google Play store.  You can optionally set an alternate market by using;
-
-`AppRater.setMarket(new GoogleMarket());`
-
-`AppRater.setMarket(new AmazonMarket());`
+**Option Details:**
+ * `daysUntilPrompt(int days)` - Number of day until the user will be prompted (Default 3 days)
+ * `launchesUntilPrompt(int numLaunches)` - Minimum number of launches before prompt is displayed.
+ This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
+ * `isDark(boolean isDark)` - If true then `android.app.AlertDialog.THEME_HOLO_DARK` is used,
+ if false then `android.app.AlertDialog.THEME_HOLO_LIGHT` is used. (Default to app style)
+ * `hideNoButton(boolean hide)` - If true then no "No thank you" option is available. (Default `false`)
+ * `isVersionNameCheckEnabled(boolean checkName)` - If true then re-enable prompt. (Default `false`)
+ * `isVersionCodeCheckEnabled(boolean checkCode)` - If true then re-enable prompt. (Default `false`)
+ * `market(Market market)` - Class that implements `Market` interface. (Default `GoogleMarket`)
 
 You can implement your own market, implementing the Market interface and parse your URI.
 
