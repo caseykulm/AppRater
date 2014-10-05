@@ -7,22 +7,99 @@ AppRater inherits your themeing so can be used with light or dark variants as se
 
 ![Example Image Dark][1] ![Example Image Light][2]
 
-To use simply add the library to your app and make one call within your onCreate method as follows;
+## Quick Setup
 
-`AppRater.app_launched(this);`
+### Single Activity Usage
+
+``` java
+public class MyActivity extends Activity {
+    private AppRater mAppRater;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mAppRater = AppRater.Builder(this)
+                ...
+                .build();
+
+        mAppRater.showRateDialog();
+    }
+
+    private void letMeRate() {
+        mAppRater.rateNow();
+    }
+}
+```
+
+### Application Singleton Usage
+
+``` java
+public class MyAppRater extends AppRater {
+    private static MyAppRater mInstance;
+
+    public static MyAppRater getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new MyAppRater(context);
+        }
+
+        return mInstance;
+    }
+
+    private MyAppRater(Context context) {
+        MyAppRater myAppRater = AppRater.Builder(context.getApplicationContext())
+                        ...
+                        .build();
+
+        return myAppRater;
+    }
+}
+```
+
+With this you can simply call `MyAppRater.getInstance(context)`, to retrieve an instance from
+anywhere in your app with all of the customization set once. This is the preferred implementation
+if you only intend to have one style.
+
+## Configuration
 
 There are several options you can also use to change the default behavior.
 
-You can use the overriden method to specify your own day and launch count parameters.
-`setVersionCodeCheckEnabled` or `setVersionNameCheckEnabled` enable version checking, which will re-enable the prompt count if a new version is installed.
-`isNoButtonVisible` will disable the No Thanks button, forcing the user to either rate or prompt later.
-`setDarkTheme` and `setLightTheme` enable manual control over the theme the dialog uses, overriding your application default.
+``` java
+// An example using every option with default values.
+AppRater.Builder(context)
+        .daysUntilPrompt(3)
+        .launchesUntilPrompt(7)
+        .isDark(true)
+        .hideNoButton(false)
+        .isVersionNameCheckEnabled(false)
+        .isVersionCodeCheckEnabled(false)
+        .market(new GoogleMarket())
+        .build();
+```
 
-By default this will link to the Google Play store.  You can optionally set an alternate market by using;
+An AppRater object can be instantiated with these same default values simply with,
 
-`AppRater.setMarket(new GoogleMarket());`
+``` java
+AppRater appRater = new AppRater();
+```
 
-`AppRater.setMarket(new AmazonMarket());`
+**Option Details:**
+ * `daysUntilPrompt(int days)`   
+    Number of day until the user will be prompted (Default 3 days)
+ * `launchesUntilPrompt(int numLaunches)`   
+    Minimum number of launches before prompt is displayed.
+    This has higher priority than `daysUntilPrompt(int days)`. (Default 7 launches)
+ * `isDark(boolean isDark)`   
+    If true then `android.app.AlertDialog.THEME_HOLO_DARK` is used,
+    if false then `android.app.AlertDialog.THEME_HOLO_LIGHT` is used. (Default to app style)
+ * `hideNoButton(boolean hide)`   
+    If true then no "No thank you" option is available. (Default `false`)
+ * `isVersionNameCheckEnabled(boolean checkName)`   
+    If true then re-enable prompt. (Default `false`)
+ * `isVersionCodeCheckEnabled(boolean checkCode)`   
+    If true then re-enable prompt. (Default `false`)
+ * `market(Market market)`   
+    Class that implements `Market` interface. (Default `GoogleMarket`)
 
 You can implement your own market, implementing the Market interface and parse your URI.
 
