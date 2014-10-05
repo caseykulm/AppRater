@@ -33,6 +33,11 @@ public class MainActivity extends Activity {
 			}
 		});
 
+        /**
+         * AppRater.Builder showing every option to choose
+         * from as well as the default value if an option is
+         * not set.
+          */
         mAppRater = new AppRater.Builder(this)
                 .daysUntilPromptForRemindLater(3)
                 .launchesUntilPromptForRemindLater(7)
