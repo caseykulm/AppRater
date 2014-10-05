@@ -95,17 +95,19 @@ AppRater appRater = new AppRater();
  * `hideNoButton(boolean hide)`   
     If true then no "No thank you" option is available. (Default `false`)
  * `isVersionNameCheckEnabled(boolean checkName)`   
-    If true then re-enable prompt. (Default `false`)
+    If true then re-enable prompt check. (Default `false`)
  * `isVersionCodeCheckEnabled(boolean checkCode)`   
-    If true then re-enable prompt. (Default `false`)
+    If true then re-enable prompt check. (Default `false`)
  * `market(Market market)`   
     Class that implements `Market` interface. (Default `GoogleMarket`)
 
-You can implement your own market, implementing the Market interface and parse your URI.
+**Notes:**
+You can implement your own market, implementing the `Market` interface and parse your URI.
 
-If you want to have a "Rate Now" menu option to go straight to your play store listing call `AppRater.rateNow(this);` within your menu code.
+## Demo Project
 
-Try out the demo within this repository.
+Try out the demo within this repository to see an example of all the features
+of AppRater.
 
 ## Gradle
 
