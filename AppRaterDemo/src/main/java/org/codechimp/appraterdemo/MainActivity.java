@@ -1,6 +1,5 @@
 package org.codechimp.appraterdemo;
 
-import org.codechimp.apprater.AmazonMarket;
 import org.codechimp.apprater.AppRater;
 import org.codechimp.apprater.GoogleMarket;
 
@@ -16,6 +15,7 @@ import android.app.Activity;
 public class MainActivity extends Activity {
 
 	private Button buttonTest;
+    private AppRater mAppRater;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +29,20 @@ public class MainActivity extends Activity {
 				
 				// This forces display of the rate prompt.
 				// It should only be used for testing purposes
-				AppRater.showRateDialog(v.getContext());
+				mAppRater.showRateDialog();
 			}
 		});
 
+        mAppRater = new AppRater.Builder(this)
+                .daysUntilPromptForRemindLater(3)
+                .launchesUntilPromptForRemindLater(7)
+                .isDark(false)
+                .hideNoButton(false)
+                .isVersionNameCheckEnabled(false)
+                .isVersionCodeCheckEnabled(false)
+                .market(new GoogleMarket())
+                .build();
 
-        // Optionally you can set the Market you want to use prior to calling app_launched
-        // If setMarket not called it will default to Google Play
-        // Current implementations are Google Play and Amazon App Store, you can add your own by implementing Market
-        // AppRater.setMarket(new GoogleMarket());
-        // AppRater.setMarket(new AmazonMarket());
-
-        // This will keep a track of when the app was first used and whether to show a prompt
-		// It should be the default implementation of AppRater
-        AppRater.app_launched(this);
 	}
 
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case (R.id.menu_ratenow): {
-                AppRater.rateNow(this);
+                mAppRater.rateNow();
                 return true;
             }
         }
